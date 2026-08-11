@@ -1,0 +1,62 @@
+.ambition {
+  width: 100%;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+  padding: 120px 70px;
+}
+
+.ambition-left {
+  display: flex;
+  align-items: flex-start;
+}
+
+.ambition-left p {
+  font-size: 28px;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ambition-right h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(58px, 6vw, 108px);
+  line-height: 0.95;
+  font-weight: 400;
+  color: #111;
+  letter-spacing: -3px;
+}
+
+.ambition-right span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 10px;
+}
+
+@media (max-width: 991px) {
+  .ambition {
+    grid-template-columns: 1fr;
+    padding: 80px 35px;
+    gap: 25px;
+  }
+
+  .ambition-right h2 {
+    font-size: clamp(42px, 8vw, 72px);
+    letter-spacing: -2px;
+  }
+
+  .ambition-left p {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ambition {
+    padding: 60px 22px;
+  }
+
+  .ambition-right h2 {
+    font-size: 40px;
+    line-height: 1;
+  }
+}

@@ -1,0 +1,279 @@
+/* ==========================================================================
+   ABOUT PAGE
+   Light by default, crossfades to black once the page is scrolled halfway
+   ========================================================================== */
+
+.about-page {
+  --ap-bg: #fff;
+  --ap-ink: #0a0a0b;
+  --ap-ink-soft: rgba(10, 10, 11, 0.62);
+  --ap-line: rgba(10, 10, 11, 0.14);
+  --ap-media-bg: rgba(10, 10, 11, 0.05);
+  --ap-item-bg: #fff;
+  --ap-gutter: clamp(1.5rem, 4vw, 4rem);
+  --ap-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  width: 100%;
+  background: var(--ap-bg);
+  color: var(--ap-ink);
+  box-sizing: border-box;
+  transition: background-color 0.8s var(--ap-ease), color 0.8s var(--ap-ease);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.about-page--dark {
+  --ap-bg: #050505;
+  --ap-ink: #f5f5f5;
+  --ap-ink-soft: rgba(255, 255, 255, 0.62);
+  --ap-line: rgba(255, 255, 255, 0.16);
+  --ap-media-bg: rgba(255, 255, 255, 0.06);
+  --ap-item-bg: #050505;
+}
+
+/* ==========================================================================
+   INTRO
+   ========================================================================== */
+
+.about-intro {
+  padding: clamp(7rem, 15vh, 9.5rem) var(--ap-gutter) clamp(3rem, 6vh, 4.5rem);
+}
+
+.about-intro-lede {
+  margin: 0;
+  max-width: 760px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 3vw, 2.35rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  transition: color 0.8s var(--ap-ease);
+}
+
+/* ==========================================================================
+   OUR APPROACH
+   ========================================================================== */
+
+.about-approach {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.5rem 3rem;
+  padding: clamp(3rem, 7vh, 4.5rem) var(--ap-gutter);
+}
+
+.about-approach-label {
+  min-width: 8rem;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.about-approach-text {
+  margin: 0;
+  max-width: 640px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--ap-ink-soft);
+  transition: color 0.8s var(--ap-ease);
+}
+
+/* ==========================================================================
+   PILLARS — Brand / Culture / Experience
+   ========================================================================== */
+
+.about-pillar {
+  padding: clamp(2rem, 4vh, 3rem) var(--ap-gutter) clamp(3rem, 6vh, 4.5rem);
+  border-top: 1px solid var(--ap-line);
+  transition: border-color 0.8s var(--ap-ease);
+}
+
+.about-pillar-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 3rem;
+  padding-bottom: clamp(2rem, 4vh, 3rem);
+}
+
+.about-pillar-head h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.01em;
+  transition: color 0.8s var(--ap-ease);
+}
+
+.about-pillar-head p {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ap-ink-soft);
+  transition: color 0.8s var(--ap-ease);
+}
+
+.about-pillar-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--ap-media-bg);
+  margin-bottom: clamp(2rem, 4vh, 3rem);
+  transition: background-color 0.8s var(--ap-ease);
+}
+
+.about-pillar-media-file {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ap-line);
+  border: 1px solid var(--ap-line);
+  transition: background-color 0.8s var(--ap-ease), border-color 0.8s var(--ap-ease);
+}
+
+.about-pillar-item {
+  background: var(--ap-item-bg);
+  padding: 1.75rem;
+  transition: background-color 0.8s var(--ap-ease);
+}
+
+.about-pillar-dot {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 1.75rem;
+  border-radius: 50%;
+  background: var(--pillar-color);
+}
+
+.about-pillar-item h3 {
+  margin: 0 0 0.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.8s var(--ap-ease);
+}
+
+.about-pillar-item p {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ap-ink-soft);
+  transition: color 0.8s var(--ap-ease);
+}
+
+/* ==========================================================================
+   TEAM — the only black section on the page
+   ========================================================================== */
+
+.about-team {
+  padding: clamp(6.5rem, 13vh, 9rem) var(--ap-gutter) clamp(5rem, 10vh, 8rem);
+  background: #050505;
+  color: #f5f5f5;
+}
+
+.about-team-heading {
+  margin: 0 0 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.about-team-lede {
+  margin: 0 0 clamp(3rem, 7vh, 5rem);
+  max-width: 820px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.about-team-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding-bottom: 1.75rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  overflow-x: auto;
+}
+
+.about-team-filter {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.about-team-filter:hover {
+  color: #fff;
+}
+
+.about-team-filter.is-active {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-team-names {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 2.2;
+}
+
+.about-team-member {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  margin-right: 0.35rem;
+}
+
+.about-team-dot {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--dot-color);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .about-pillar-head {
+    grid-template-columns: 1fr;
+  }
+
+  .about-pillar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page,
+  .about-page * {
+    transition-duration: 0.01ms !important;
+  }
+}

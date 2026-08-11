@@ -1,0 +1,198 @@
+/* ==========================================================================
+   FOOTER
+   Bright yellow footer with link columns + oversized wordmark
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  width: 100%;
+  background: #fcff51;
+  color: #101012;
+  overflow: hidden;
+  padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 4vw, 3.75rem) 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   TOP ROW
+   ========================================================================== */
+
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding-bottom: clamp(3rem, 8vh, 5rem);
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-col--year {
+  flex: 0 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #101012;
+}
+
+.footer-col--cta {
+  flex: 1 1 320px;
+  max-width: 420px;
+}
+
+.footer-cta-heading {
+  margin: 0 0 0.9rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.footer-col--social {
+  flex: 0 0 auto;
+}
+
+.footer-col--back {
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+/* ==========================================================================
+   LINK LISTS
+   ========================================================================== */
+
+.footer-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-link-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #101012;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.footer-link-list a:hover {
+  gap: 0.75rem;
+  opacity: 0.7;
+}
+
+.footer-link-list a:hover .footer-arrow {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+
+.footer-back-to-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #101012;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
+
+.footer-back-arrow {
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.35s ease;
+}
+
+.footer-back-to-top:hover {
+  transform: translateY(-4px);
+}
+
+.footer-back-to-top:hover .footer-back-arrow {
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   WORDMARK
+   ========================================================================== */
+
+.footer-wordmark {
+  width: 100%;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.footer-wordmark-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .footer-top {
+    flex-wrap: wrap;
+    row-gap: 2rem;
+  }
+
+  .footer-col--year {
+    order: 1;
+  }
+
+  .footer-col--back {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .footer-col--cta {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .footer-col--social {
+    order: 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-wordmark-logo {
+    width: 130%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-link-list a,
+  .footer-arrow,
+  .footer-back-to-top,
+  .footer-back-arrow {
+    transition-duration: 0.01ms !important;
+  }
+}

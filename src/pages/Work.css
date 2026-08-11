@@ -1,0 +1,230 @@
+/* ==========================================================================
+   WORK PAGE
+   Full work listing — mirrors the Selected Work bento grid styling
+   ========================================================================== */
+
+.work-page {
+  --wp-bg: #050505;
+  --wp-ink: #f5f5f5;
+  --wp-ink-soft: rgba(255, 255, 255, 0.56);
+  --wp-ink-faint: rgba(255, 255, 255, 0.4);
+  --wp-accent: #c9a876;
+  --wp-tag-border: rgba(255, 255, 255, 0.16);
+  --wp-tag-bg: rgba(255, 255, 255, 0.04);
+  --wp-line: rgba(255, 255, 255, 0.12);
+  --wp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --wp-gutter: clamp(1.5rem, 4vw, 4rem);
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--wp-bg);
+  color: var(--wp-ink);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   INTRO
+   ========================================================================== */
+
+.work-page-intro {
+  padding: clamp(7rem, 16vh, 10rem) var(--wp-gutter) clamp(3rem, 7vh, 5rem);
+  max-width: 900px;
+}
+
+.work-page-title {
+  margin: 0 0 1.25rem;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.work-page-lede {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--wp-ink-soft);
+  max-width: 640px;
+}
+
+/* ==========================================================================
+   GRID
+   ========================================================================== */
+
+.work-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 0 var(--wp-gutter) clamp(5rem, 11vh, 8.5rem);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.work-page-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.work-page-card--half {
+  grid-column: span 1;
+}
+
+.work-page-card--full {
+  grid-column: 1 / -1;
+}
+
+.work-page-card-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--wp-tag-bg);
+  contain: layout paint;
+}
+
+.work-page-card--half .work-page-card-media {
+  aspect-ratio: 3.5 / 3.5;
+}
+
+.work-page-card--full .work-page-card-media {
+  aspect-ratio: 21 / 10;
+}
+
+.work-page-card-media img,
+.work-page-card-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 0.9s var(--wp-ease);
+}
+
+.work-page-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 11, 0) 55%,
+    rgba(10, 10, 11, 0.18) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s var(--wp-ease);
+  pointer-events: none;
+}
+
+.work-page-card:hover .work-page-card-media img,
+.work-page-card:hover .work-page-card-media video {
+  transform: scale(1.06);
+}
+
+.work-page-card:hover .work-page-card-overlay {
+  opacity: 1;
+}
+
+.work-page-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: clamp(1rem, 2vh, 1.5rem);
+}
+
+.work-page-card-title {
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+  color: var(--wp-ink);
+  transition: color 0.4s var(--wp-ease);
+}
+
+.work-page-card:hover .work-page-card-title {
+  color: var(--wp-accent);
+}
+
+.work-page-card-subtitle {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--wp-ink-soft);
+}
+
+.work-page-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.work-page-card-tag {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--wp-tag-border);
+  border-radius: 999px;
+  background: var(--wp-tag-bg);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--wp-ink-faint);
+  white-space: nowrap;
+  transition: border-color 0.4s var(--wp-ease), color 0.4s var(--wp-ease);
+}
+
+.work-page-card:hover .work-page-card-tag {
+  border-color: var(--wp-accent);
+  color: var(--wp-ink);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .work-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-page-card--full .work-page-card-media {
+    aspect-ratio: 4 / 3.2;
+  }
+}
+
+@media (max-width: 600px) {
+  .work-page-card-tags {
+    gap: 0.4rem;
+  }
+
+  .work-page-card-tag {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-page-card-media img,
+  .work-page-card-overlay,
+  .work-page-card-title,
+  .work-page-card-tag {
+    transition-duration: 0.01ms !important;
+  }
+}

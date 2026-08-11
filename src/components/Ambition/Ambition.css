@@ -1,0 +1,50 @@
+.ambition {
+  display: grid;
+  grid-template-columns: minmax(8rem, 10vw) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 4rem);
+  padding: clamp(6rem, 11vw, 10rem) clamp(1.5rem, 4vw, 4rem);
+  background: #fff;
+  color: #080808;
+}
+
+.ambition__label {
+  margin: clamp(0.45rem, 1.15vw, 1.1rem) 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.9rem, 1.15vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.ambition__title {
+  max-width: 22ch;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 6vw, 6.4rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.98;
+}
+
+.ambition__title span {
+  display: inline;
+  padding-bottom: 0.035em;
+  border-bottom: 0.045em solid currentColor;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .ambition {
+    grid-template-columns: 1fr;
+    gap: 1.7rem;
+    padding-block: clamp(5rem, 16vw, 7rem);
+  }
+
+  .ambition__label {
+    margin: 0;
+  }
+
+  .ambition__title {
+    max-width: 14ch;
+    font-size: clamp(2.6rem, 11.5vw, 4.4rem);
+  }
+}

@@ -1,0 +1,756 @@
+/* ==========================================================================
+   HERO.CSS
+   Premium agency-grade hero section
+   Design tokens: near-black stage, warm ivory type, muted brass accent
+   ========================================================================== */
+
+:root {
+  --hero-bg: #0a0a0b;
+  --hero-ink: #f4f1ea;
+  --hero-ink-soft: rgba(244, 241, 234, 0.72);
+  --hero-ink-faint: rgba(244, 241, 234, 0.4);
+  --hero-accent: #c9a876;
+  --hero-accent-soft: rgba(201, 168, 118, 0.35);
+  --hero-cursor-yellow: #f5c518;
+  --hero-line: rgba(244, 241, 234, 0.18);
+  --hero-line-strong: rgba(244, 241, 234, 0.32);
+  --hero-glass-bg: rgba(244, 241, 234, 0.06);
+  --hero-glass-border: rgba(244, 241, 234, 0.16);
+  --hero-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --hero-ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --hero-radius: 999px;
+  --hero-gutter: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* ==========================================================================
+   HERO — root stage
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  isolation: isolate;
+  contain: layout paint size;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==========================================================================
+   MEDIA — image / video fill layer
+   ========================================================================== */
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  transform: translate3d(0, 0, 0);
+  contain: strict;
+}
+
+.hero-image,
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center center;
+  transform: translate3d(0, 0, 0) scale(1.08);
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-image {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.hero-video {
+  object-fit: cover;
+}
+
+/* GSAP will animate .hero-image / .hero-video opacity + scale on load.
+   Base state left dim/scaled up intentionally as an entrance anchor. */
+
+/* Directional cursor zones — left half / right half of the media
+   swap the system cursor for a slim yellow arrow, signalling
+   click-to-navigate without any extra markup beyond .hero-media. */
+.hero-media::before,
+.hero-media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.hero-media::before {
+  left: 0;
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='21' fill='rgba(10,10,11,0.5)' stroke='%23f5c518' stroke-width='1'/%3E%3Cpath d='M26 15 L18 23 L26 31' stroke='%23f5c518' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      23 23,
+    w-resize;
+}
+
+.hero-media::after {
+  right: 0;
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 46 46'%3E%3Ccircle cx='23' cy='23' r='21' fill='rgba(10,10,11,0.5)' stroke='%23f5c518' stroke-width='1'/%3E%3Cpath d='M20 15 L28 23 L20 31' stroke='%23f5c518' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      23 23,
+    e-resize;
+}
+
+/* Final hero text sizing — kept last so it overrides all responsive rules. */
+.hero-category {
+  margin-bottom: 0.35rem !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: clamp(0.8rem, 0.9vw, 0.95rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--hero-ink) !important;
+}
+
+.hero-category::before {
+  display: none !important;
+}
+
+.hero-title {
+  max-width: min(90vw, 900px) !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: clamp(1.4rem, 2vw, 2rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.035em !important;
+  color: var(--hero-ink) !important;
+}
+
+.hero-title em,
+.hero-title i {
+  color: inherit !important;
+}
+
+/* Keep the old CSS-only zones inactive: React now controls the cursor. */
+.hero-media::before,
+.hero-media::after {
+  pointer-events: none;
+  cursor: none;
+}
+
+/* Compact text treatment matching the supplied hero reference. */
+.hero-category {
+  gap: 0;
+  margin-bottom: 0.35rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--hero-ink);
+}
+
+.hero-category::before {
+  display: none;
+}
+
+.hero-title {
+  max-width: min(90vw, 900px);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: pretty;
+}
+
+.hero-title em,
+.hero-title i {
+  color: inherit;
+}
+
+@media (max-width: 479px) {
+  .hero-content {
+    padding-inline: 2rem;
+  }
+}
+
+/* ==========================================================================
+   OVERLAYS — dark wash + directional gradient for legibility
+   ========================================================================== */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 11, 0.35) 0%,
+    rgba(10, 10, 11, 0.12) 30%,
+    rgba(10, 10, 11, 0.18) 60%,
+    rgba(10, 10, 11, 0.55) 100%
+  );
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.hero-gradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 60%;
+  background: linear-gradient(
+    0deg,
+    rgba(6, 6, 7, 0.82) 0%,
+    rgba(6, 6, 7, 0.55) 28%,
+    rgba(6, 6, 7, 0.18) 60%,
+    rgba(6, 6, 7, 0) 100%
+  );
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* ==========================================================================
+   CONTENT — text stack
+   ========================================================================== */
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  padding: clamp(6rem, 12vh, 9rem) var(--hero-gutter) clamp(4.5rem, 9vh, 7rem);
+  box-sizing: border-box;
+}
+
+.hero-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0 0 clamp(1.2rem, 2.4vh, 1.8rem);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--hero-ink-soft);
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: transform, opacity, filter;
+}
+
+.hero-category::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--hero-accent);
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 22ch;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(2.75rem, 7.5vw, 7.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--hero-ink);
+  opacity: 0;
+  transform: translateY(48px);
+  filter: blur(0px);
+  will-change: transform, opacity, filter;
+  text-wrap: balance;
+}
+
+.hero-title em,
+.hero-title i {
+  font-style: italic;
+  color: var(--hero-accent);
+}
+
+/* ==========================================================================
+   NAVIGATION — prev/next controls
+   ========================================================================== */
+
+.hero-navigation {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.5rem, 3vh, 2rem);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.hero-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 2.4vw, 38px);
+  height: clamp(32px, 2.4vw, 38px);
+  border-radius: 50%;
+  border: 1px solid var(--hero-line);
+  background: transparent;
+  color: var(--hero-ink-soft);
+  cursor: pointer;
+  overflow: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    transform 0.5s var(--hero-ease),
+    background-color 0.5s var(--hero-ease-soft),
+    border-color 0.5s var(--hero-ease-soft),
+    color 0.5s var(--hero-ease-soft),
+    box-shadow 0.5s var(--hero-ease-soft);
+  will-change: transform;
+}
+
+.hero-arrow svg,
+.hero-arrow img {
+  width: 32%;
+  height: 32%;
+  transition: transform 0.45s var(--hero-ease);
+}
+
+.hero-arrow::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.5s var(--hero-ease-soft), inset 0.5s var(--hero-ease-soft);
+  pointer-events: none;
+}
+
+.hero-arrow:hover {
+  transform: translate3d(0, 0, 0) scale(1.1);
+  background: transparent;
+  border-color: var(--hero-cursor-yellow);
+  color: var(--hero-cursor-yellow);
+  box-shadow: 0 0 16px rgba(245, 197, 24, 0.25);
+}
+
+.hero-arrow:hover::after {
+  border-color: var(--hero-accent-soft);
+}
+
+.hero-arrow:active {
+  transform: translate3d(0, 0, 0) scale(0.96);
+}
+
+.hero-arrow:focus-visible {
+  outline: 2px solid var(--hero-accent);
+  outline-offset: 3px;
+}
+
+.hero-arrow--prev svg {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   PROGRESS — bottom-centered slide progress
+   ========================================================================== */
+
+.hero-progress-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(3.75rem, 7vh, 4.75rem);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  transform: translate3d(-50%, 0, 0);
+  width: min(220px, 38vw);
+}
+
+.hero-progress {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  border-radius: var(--hero-radius);
+  background: var(--hero-line);
+  overflow: hidden;
+}
+
+.hero-progress::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--hero-radius);
+  background: var(--hero-accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  /* GSAP animates transform: scaleX(0 -> 1) with transform-origin: left */
+}
+
+.hero-counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--hero-ink-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.hero-counter em,
+.hero-counter i {
+  font-style: normal;
+  color: var(--hero-ink);
+}
+
+.hero-counter span {
+  color: var(--hero-ink-faint);
+}
+
+/* ==========================================================================
+   SCROLL INDICATOR — bottom-left
+   ========================================================================== */
+
+.scroll-indicator {
+  position: absolute;
+  left: var(--hero-gutter);
+  bottom: clamp(2rem, 4vh, 2.75rem);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.scroll-indicator span {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--hero-ink-faint);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.scroll-line {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  overflow: hidden;
+  background: var(--hero-line);
+}
+
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--hero-accent) 45%,
+    var(--hero-accent) 55%,
+    transparent 100%
+  );
+  will-change: transform;
+  animation: hero-scroll-travel 2.2s var(--hero-ease-soft) infinite;
+}
+
+@keyframes hero-scroll-travel {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 200%, 0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* Large screens / cinema displays */
+@media (min-width: 1800px) {
+  .hero-title {
+    max-width: 26ch;
+  }
+
+  .hero-progress-wrapper {
+    width: min(280px, 32vw);
+  }
+}
+
+/* Laptops */
+@media (max-width: 1279px) {
+  .hero-content {
+    padding-inline: clamp(1.5rem, 3.6vw, 3rem);
+  }
+}
+
+/* Tablets */
+@media (max-width: 1023px) {
+  .hero-title {
+    max-width: 18ch;
+    line-height: 1.02;
+  }
+
+  .hero-progress-wrapper {
+    width: min(190px, 46vw);
+  }
+
+  .scroll-indicator span {
+    display: none;
+  }
+
+  .scroll-line {
+    height: 44px;
+  }
+}
+
+/* Tablets — portrait / small tablets */
+@media (max-width: 767px) {
+  .hero {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .hero-content {
+    padding-top: clamp(4.5rem, 14vh, 6rem);
+    padding-bottom: clamp(6.5rem, 16vh, 8rem);
+  }
+
+  .hero-title {
+    max-width: 15ch;
+    font-size: clamp(2.25rem, 9vw, 3.5rem);
+  }
+
+  .hero-navigation {
+    bottom: clamp(1.25rem, 3vh, 1.75rem);
+  }
+
+  .hero-progress-wrapper {
+    bottom: clamp(3rem, 6vh, 3.75rem);
+    width: min(180px, 50vw);
+  }
+
+  .scroll-indicator {
+    bottom: clamp(1.5rem, 3.5vh, 2rem);
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 479px) {
+  :root {
+    --hero-gutter: 1.25rem;
+  }
+
+  .hero-title {
+    max-width: 13ch;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-category {
+    margin-bottom: 1rem;
+  }
+
+  .hero-navigation {
+    gap: 0.4rem;
+  }
+
+  .hero-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero-content {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 6vw, 2.75rem);
+    max-width: 20ch;
+  }
+
+  .hero-navigation {
+    bottom: 0.75rem;
+  }
+
+  .hero-progress-wrapper {
+    bottom: 2.25rem;
+  }
+
+  .scroll-indicator {
+    bottom: 1.25rem;
+  }
+
+  .scroll-line {
+    height: 32px;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY — reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image,
+  .hero-video,
+  .hero-overlay,
+  .hero-gradient,
+  .hero-category,
+  .hero-title,
+  .hero-arrow,
+  .hero-arrow::after,
+  .hero-arrow svg,
+  .hero-arrow img,
+  .hero-progress::before,
+  .scroll-indicator,
+  .scroll-line::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ======================================================================
+   LARGE YELLOW CURSOR — visible on every part of the hero
+   ====================================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .hero,
+  .hero * {
+    cursor: none;
+  }
+}
+
+.hero-media::before,
+.hero-media::after {
+  pointer-events: none;
+  cursor: none;
+}
+
+.hero-cursor {
+  --cursor-x: -100px;
+  --cursor-y: -100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border: 2px solid var(--hero-cursor-yellow);
+  border-radius: 50%;
+  background: rgba(10, 10, 11, 0.38);
+  box-shadow: 0 0 30px rgba(245, 197, 24, 0.3);
+  color: var(--hero-cursor-yellow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0)
+    translate3d(-50%, -50%, 0) scale(0.55);
+  transition: opacity 0.18s ease, transform 0.25s var(--hero-ease),
+    background-color 0.25s ease;
+}
+
+.hero-cursor.is-visible {
+  opacity: 1;
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0)
+    translate3d(-50%, -50%, 0) scale(1);
+}
+
+.hero-cursor.is-dragging {
+  background: rgba(245, 197, 24, 0.16);
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0)
+    translate3d(-50%, -50%, 0) scale(0.78);
+}
+
+.hero-cursor svg {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  stroke-width: 1.8;
+}
+
+.hero-cursor__left,
+.hero-cursor.is-next .hero-cursor__left {
+  display: none;
+}
+
+.hero-cursor.is-prev .hero-cursor__left {
+  display: block;
+}
+
+.hero-cursor.is-prev .hero-cursor__right {
+  display: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .hero-cursor {
+    display: none;
+  }
+}
+/* BIG YELLOW LEFT / RIGHT CURSOR — CSS ONLY */
+
+.hero-media::before,
+.hero-media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.hero-media::before {
+  left: 0;
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='86' height='86' viewBox='0 0 86 86'%3E%3Ccircle cx='43' cy='43' r='40' fill='%230a0a0b' fill-opacity='.45' stroke='%23f5c518' stroke-width='2'/%3E%3Cpath d='M50 27 L34 43 L50 59' stroke='%23f5c518' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      43 43,
+    w-resize;
+}
+
+.hero-media::after {
+  right: 0;
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='86' height='86' viewBox='0 0 86 86'%3E%3Ccircle cx='43' cy='43' r='40' fill='%230a0a0b' fill-opacity='.45' stroke='%23f5c518' stroke-width='2'/%3E%3Cpath d='M36 27 L52 43 L36 59' stroke='%23f5c518' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      43 43,
+    e-resize;
+}

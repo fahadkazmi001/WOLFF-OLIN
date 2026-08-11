@@ -1,0 +1,262 @@
+/* ==========================================================================
+   SELECTED WORK
+   Premium bento-style portfolio grid
+   ========================================================================== */
+
+:root {
+  --work-bg: #f7f5f0;
+  --work-ink: #0a0a0b;
+  --work-ink-soft: rgba(10, 10, 11, 0.56);
+  --work-ink-faint: rgba(10, 10, 11, 0.4);
+  --work-accent: #c9a876;
+  --work-tag-border: rgba(10, 10, 11, 0.14);
+  --work-tag-bg: rgba(10, 10, 11, 0.03);
+  --work-line: rgba(10, 10, 11, 0.1);
+  --work-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --work-gutter: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* ==========================================================================
+   SECTION
+   ========================================================================== */
+
+.work {
+  position: relative;
+  width: 100%;
+  background: var(--work-bg);
+  color: var(--work-ink);
+  padding: clamp(4rem, 9vh, 7rem) var(--work-gutter) clamp(5rem, 11vh, 8.5rem);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.work-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 5vh, 3.5rem);
+  padding-bottom: clamp(1.5rem, 3vh, 2rem);
+  border-bottom: 1px solid var(--work-line);
+}
+
+.work-label {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  letter-spacing: -0.01em;
+  color: var(--work-ink);
+}
+
+.work-view-all {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--work-ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.4s var(--work-ease);
+}
+
+.work-view-all::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s var(--work-ease), background-color 0.4s var(--work-ease);
+}
+
+.work-view-all:hover {
+  color: var(--work-accent);
+}
+
+.work-view-all:hover::after {
+  width: 32px;
+}
+
+/* ==========================================================================
+   GRID
+   ========================================================================== */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.work-card--half {
+  grid-column: span 1;
+}
+
+.work-card--full {
+  grid-column: 1 / -1;
+}
+
+.work-card-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--work-tag-bg);
+  contain: layout paint;
+}
+
+.work-card--half .work-card-media {
+  aspect-ratio: 3.5 / 3.5;
+}
+
+.work-card--full .work-card-media {
+  aspect-ratio: 21 / 10;
+}
+
+.work-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 0.9s var(--work-ease);
+}
+
+.work-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 11, 0) 55%,
+    rgba(10, 10, 11, 0.18) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s var(--work-ease);
+  pointer-events: none;
+}
+
+.work-card:hover .work-card-image {
+  transform: scale(1.06);
+}
+
+.work-card:hover .work-card-overlay {
+  opacity: 1;
+}
+
+.work-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: clamp(1rem, 2vh, 1.5rem);
+}
+
+.work-card-title {
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+  color: var(--work-ink);
+  transition: color 0.4s var(--work-ease);
+}
+
+.work-card:hover .work-card-title {
+  color: var(--work-accent);
+}
+
+.work-card-subtitle {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--work-ink-soft);
+}
+
+.work-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.work-card-tag {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--work-tag-border);
+  border-radius: 999px;
+  background: var(--work-tag-bg);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--work-ink-faint);
+  white-space: nowrap;
+  transition: border-color 0.4s var(--work-ease), color 0.4s var(--work-ease);
+}
+
+.work-card:hover .work-card-tag {
+  border-color: var(--work-accent);
+  color: var(--work-ink);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card--full .work-card-media {
+    aspect-ratio: 4 / 3.2;
+  }
+}
+
+@media (max-width: 600px) {
+  .work-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .work-card-tags {
+    gap: 0.4rem;
+  }
+
+  .work-card-tag {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card-image,
+  .work-card-overlay,
+  .work-card-title,
+  .work-card-tag,
+  .work-view-all::after {
+    transition-duration: 0.01ms !important;
+  }
+}
